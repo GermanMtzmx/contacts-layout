@@ -1,0 +1,21 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="app-settings">
+	
+	<template>
+		<h2>Im settings modafucka</h2>
+	</template>
+
+	<script>
+		(function Settings(customElements){
+			'use strict';
+
+			class AppSettings extends Polymer.Element {
+				static get is(){return 'app-settings';}
+			}
+			
+			customElements.define(AppSettings.is,AppSettings);
+		})(window.customElements);
+	</script>
+
+</dom-module>

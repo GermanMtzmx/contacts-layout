@@ -1,0 +1,19 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="app-contacts">
+	
+	<template>
+		<h3>I should contain contacts ...</h3>
+	</template>
+
+
+	<script>
+		(function Contacts(customElements){
+			'use strict';
+			class AppContacts extends Polymer.Element {
+				static get is(){return 'app-contacts';}
+			}
+			customElements.define(AppContacts.is,AppContacts);
+		})(window.customElements);
+	</script>
+</dom-module>
