@@ -1,9 +1,53 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
+
+
+<link rel="import" href="../app-contact-selected/app-contact-selected.html">
+<link rel="import" href="../app-contact/app-contact.html">
+
 
 <dom-module id="app-contacts">
 	
 	<template>
-		<h3>I should contain contacts ...</h3>
+		
+	
+		<style>
+			:host {
+				    width: 90%;
+				    margin: 3px auto;
+				    border: 3px solid yellow;
+				    display: flex;
+				    flex-wrap: wrap;
+				    justify-content: center;
+				    align-items: center;
+
+			}
+
+			.contact 
+		</style>
+
+		<template is="dom-repeat" items=[[contacts]]>
+			<app-contact class="contact" contact="[[item]]">
+				
+			</app-contact>
+		</template>
+
+<!-- 		<app-location route="{{route}}"></app-location>
+		<app-route
+			route="{{route}}"
+			pattern="/:user"
+			data="{{routeData}}"
+		>			
+		</app-route>
+
+
+		<iron-pages selected="user-list" attr-for-selected="view" fallback-selection="user-list">
+			
+		</iron-pages> -->
+
 	</template>
 
 
@@ -12,6 +56,20 @@
 			'use strict';
 			class AppContacts extends Polymer.Element {
 				static get is(){return 'app-contacts';}
+
+				static get properties() {
+					return {
+						contacts:{
+							type:Array,
+							value:[],
+							observer:'_contactsChanged'
+						}
+					}
+				}
+
+				_contactsChanged(){
+					console.log("contacts has changed",this.contacts)
+				}
 			}
 			customElements.define(AppContacts.is,AppContacts);
 		})(window.customElements);

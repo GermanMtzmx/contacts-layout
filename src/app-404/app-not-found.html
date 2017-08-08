@@ -1,0 +1,27 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="app-not-found">
+	<template>
+		<style>
+			.not-found {
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+
+		<img class="not-found" src="/assets/notFound.jpg" alt="not found image ...">
+	</template>
+
+	<script>
+		(function NotFound(customElements){
+			'use strict';
+
+			class AppNotFound extends Polymer.Element {
+				static get is() {return 'app-not-found';}
+			}
+
+			customElements.define(AppNotFound.is,AppNotFound);
+		})(window.customElements);	
+	</script>
+
+</dom-module>

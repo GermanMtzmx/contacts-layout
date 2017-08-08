@@ -16,14 +16,41 @@
 
 <link rel="import" href="../app-contacts/app-contacts.html">
 <link rel="import" href="../app-settings/app-settings.html">
+<link rel="import" href="../app-404/app-not-found.html">
 
 <!-- App shell -->
 <dom-module id="app-boot">
 	<template>
+
+		<style>
+			.header {
+				background-color: var(--header-background-color,#00BCD4);
+				color:var(--header-font-color,#FFF);
+			}
+
+			.header-title {
+				font-size: 1.4rem;
+			}
+
+			.page-container {
+				height: calc(100vh - 68px);
+    			border: 1px solid black;
+    			background-color: #FAFAFA;
+    			box-sizing: border-box;
+
+			}
+			
+		</style>
 		
 		<!-- configuring route -->
 		<app-location route="{{route}}"></app-location>
-		<app-route route="{{route}}" pattern="/:view" data="{{routeData}}"></app-route>
+		<app-route 
+			route="{{route}}" 
+			pattern="/:view" 
+			data="{{routeData}}" 
+			tail="{{subroute}}">
+			
+		</app-route>
 		<!-- end routing conf -->
 		
 		<!-- main container -->
@@ -38,8 +65,8 @@
 				</app-toolbar>
 
 				<ul>
-					<li>Contactos</li>
-					<li>Configuraciones</li>
+					<li><a href="/view-contacts">Contactos</a></li>
+					<li><a href="/view-settings">Configuraciones</a></li>
 				</ul>
 
 			</app-drawer>
@@ -49,20 +76,21 @@
 			<app-header-layout>
 				
 				<!-- header -->
-				<app-header slot="header">
+				<app-header class="header" slot="header">
 					
 					<app-toolbar>
 						<paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
-						<div main-title>Lista de contactos.....</div>
+						<div main-title class="header-title">Lista de contactos</div>
 					</app-toolbar>
 
 				</app-header>
 				<!-- end header -->
 				<!-- iron pages -->
-				<iron-pages selected="[[routeData.view]]" attr-for-selected="view" fallback-selection="app-contacts">
+				<iron-pages class="page-container" selected="[[page]]" attr-for-selected="view" fallback-selection="view-not-found">
 					
-					<app-contacts view="app-contacts"></app-contacts>
-					<app-settings view="app-settings"></app-settings>
+					<app-contacts class="" contacts="[[contacts]]" view="view-contacts"></app-contacts>
+					<app-settings view="view-settings"></app-settings>
+					<app-not-found view="view-not-found"></app-not-found>
 
 				</iron-pages>
 				<!-- end iron pages -->
@@ -81,6 +109,89 @@
 			
 			class AppBoot extends Polymer.Element {
 				static get is(){return 'app-boot';}
+
+				static get properties() {
+					return {
+						routeData:{
+							type:Object,
+							observer:'_routeDataChanged'
+						},
+
+						contacts:{
+							type:Array,
+							value:[
+								{
+									name:'Juan',
+									lastName:'Perez Diaz',
+									image:'http://www.tvbus.tv/web/wp-content/uploads/2016/08/juan-gabriel-624x351-2.jpg',
+									phone:'6969696969',
+									bio:"vamos al noa noa papu"
+								},
+
+								{
+									name:'Juan',
+									lastName:'Perez Diaz',
+									image:'http://www.tvbus.tv/web/wp-content/uploads/2016/08/juan-gabriel-624x351-2.jpg',
+									phone:'6969696969',
+									bio:"vamos al noa noa papu"
+								},
+
+								{
+									name:'Juan',
+									lastName:'Perez Diaz',
+									image:'http://www.tvbus.tv/web/wp-content/uploads/2016/08/juan-gabriel-624x351-2.jpg',
+									phone:'6969696969',
+									bio:"vamos al noa noa papu"
+								},
+
+								{
+									name:'Juan',
+									lastName:'Perez Diaz',
+									image:'http://www.tvbus.tv/web/wp-content/uploads/2016/08/juan-gabriel-624x351-2.jpg',
+									phone:'6969696969',
+									bio:"vamos al noa noa papu"
+								},
+
+								{
+									name:'Juan',
+									lastName:'Perez Diaz',
+									image:'http://www.tvbus.tv/web/wp-content/uploads/2016/08/juan-gabriel-624x351-2.jpg',
+									phone:'6969696969',
+									bio:"vamos al noa noa papu"
+								},
+
+								{
+									name:'Juan',
+									lastName:'Perez Diaz',
+									image:'http://www.tvbus.tv/web/wp-content/uploads/2016/08/juan-gabriel-624x351-2.jpg',
+									phone:'6969696969',
+									bio:"vamos al noa noa papu"
+								}																									
+							]
+						},
+
+						page:{
+							type:String,
+							reflectToAttribute:true,
+							observer:'_pageChanged'
+						}
+					}
+				}
+
+				_routeDataChanged(){
+					//console.log("route data changed ",this.routeData)
+					this.page = this.routeData.view || 'view-contacts';	
+					console.log('tail is',this.subroute)
+					// if (this.page == 'view-contacts'){
+					// 	this.set('route.path','/view-contacts')
+					// }
+
+
+				}
+
+				_pageChanged(page){
+					console.log("page has changed ",this.page)
+				}
 			}
 
 			customElements.define(AppBoot.is,AppBoot)

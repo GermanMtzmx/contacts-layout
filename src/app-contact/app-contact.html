@@ -1,0 +1,46 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+
+<dom-module id="app-contact">
+	
+	<template>
+	
+		<style>
+			.custom-card {
+				width: 300px;
+				margin:10px;
+/*				height: 220px;*/
+				flex:0 0 1;
+				align-self: center;
+			}
+		</style>
+
+		<paper-card class="custom-card" image="[[contact.image]]" alt="[[contact.name]]">
+			<div class="card-content">
+				[[contact.name]] [[contact.lastName]]
+			</div>
+		</paper-card>
+		
+	</template>
+
+	<script>
+		(function Contact(customElements){
+
+			'use strict';
+			class AppContact extends Polymer.Element {
+				static get is() {return 'app-contact';}
+
+				static get properties(){
+					return {
+						contact:{
+							type:Object
+						}
+					}
+				}
+			}
+
+			customElements.define(AppContact.is,AppContact);
+
+		})(window.customElements);
+	</script>
+</dom-module>

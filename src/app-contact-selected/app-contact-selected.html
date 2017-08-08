@@ -1,0 +1,32 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="app-contact-selected">
+	<template>
+		<h1>Contact selected</h1>
+	</template>
+
+	<script>
+		(function Selected(customElements){
+			'use strict';
+
+			class AppContactSelected extends Polymer.Element {
+
+				static get is(){return 'app-contact-selected';}
+
+				static get properties() {
+					return {
+						data:{
+							type:Object
+						}
+					}
+				}
+
+
+
+			}
+
+			customElements.define(AppContactSelected.is,AppContactSelected);
+
+		})(window.customElements);
+	</script>
+</dom-module>
